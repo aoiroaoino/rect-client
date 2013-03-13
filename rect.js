@@ -7,8 +7,8 @@ window.onload = function() {
 }
 
 var position = {
-	"x": 5000,
-	"y": 5000
+	x: 5000,
+	y: 5000
 }
 	
 function init(){
