@@ -10,7 +10,7 @@ var position = {
 };
 
 var vector = {
-	key: 0
+	"key": 0
 };
 
 window.onload = function() {
@@ -41,13 +41,27 @@ function init(){
 
 function vectorSend(num) {
 	vector.key = num; 
-	socket.send();
+	socket.send(
+		{"name":"aoino","vector" : 0}
+	);
 }
 
-function up() {vectorSend(0);}
-function down() {vectorSend(6);}
-function right() {vectorSend(3);}
-function left() {vectorSend(9);}
+function up() {
+	vectorSend(0);
+	console.log("press up key");
+}
+function down() {
+	vectorSend(6);
+	console.log("press down key");
+}
+function right() {
+	vectorSend(3);
+	console.log("press right key");
+}
+function left() {
+	vectorSend(9);
+	console.log("press left key");
+}
 
 function drawRect(x, y) {
 	var canvas = document.getElementById("rectcanvas");
