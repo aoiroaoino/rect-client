@@ -1,19 +1,20 @@
 
 var socket;
-var url = "ws://localhost:9000/socket";
+var url = "ws://192.168.1.19:9000/world?name=aoino1";
 
 
 // test position
 var position = {
 	x: 5000,
 	y: 5000
-}
+};
 
 var vector = {
 	key: 0
-}
+};
 
 window.onload = function() {
+	console.log("start loop...")
 	setInterval(loop, 1000 / 60);
 }
 
@@ -28,6 +29,7 @@ function init(){
 	};
 	socket.onload = function(e) {
 		position = eval(e.data);
+		console.log(position);
 	};
 	socket.onclose = function(e) {
 		alert("Close Socket");
@@ -37,7 +39,7 @@ function init(){
 	};
 }
 
-function vectorSend(num) = {
+function vectorSend(num) {
 	vector.key = num; 
 	socket.send();
 }
