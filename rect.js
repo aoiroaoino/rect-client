@@ -2,13 +2,23 @@
 var socket;
 var url = "ws://localhost:9000/socket";
 
+
+// test position
+var position = {
+	x: 5000,
+	y: 5000
+}
+
+var vector = {
+	key: 0
+}
+
 window.onload = function() {
 	setInterval(loop, 1000 / 60);
 }
 
-var position = {
-	x: 5000,
-	y: 5000
+function loop() {
+	drawRect(position.x / 10, position.y / 10);
 }
 	
 function init(){
@@ -27,9 +37,15 @@ function init(){
 	};
 }
 
-function loop() {
-	drawRect(position.x / 10, position.y / 10);
+function vectorSend(num) = {
+	vector.key = num; 
+	socket.send();
 }
+
+function up() {vectorSend(0);}
+function down() {vectorSend(6);}
+function right() {vectorSend(3);}
+function left() {vectorSend(9);}
 
 function drawRect(x, y) {
 	var canvas = document.getElementById("rectcanvas");
@@ -38,4 +54,3 @@ function drawRect(x, y) {
 	ctx.fillRect(x, y, 10, 10);
 	ctx.stroke();
 }
-
