@@ -1,12 +1,13 @@
 
 var socket;
-var url = "ws://192.168.1.19:9000/world?name=aoino1";
+//var url = "ws://192.168.1.19:9000/world?name=aoino1";
+var url = "ws://10.2.0.18:9000/world?name=aoino1";
 
 
 // test position
 var position = {
-	x: 5000,
-	y: 5000
+	"x": 1,
+	"y": 1
 };
 
 var vector = {
@@ -27,9 +28,16 @@ function init(){
 	socket.onopen = function(e) {
 		alert("Connect " + url);
 	};
-	socket.onload = function(e) {
-		position = eval(e.data);
-		console.log(position);
+	socket.onmessage = function(e) {
+		var p = JSON.parse(e.data);
+		position.x = p.x;
+		position.y = p.y;
+		console.log("--------");
+		console.log(e.data);
+		console.log(JSON.parse(e.data));
+		console.log("--------");
+		// console.log(p.y);
+		drawRect(p.x, p.y)
 	};
 	socket.onclose = function(e) {
 		alert("Close Socket");
@@ -41,9 +49,9 @@ function init(){
 
 function vectorSend(num) {
 	vector.key = num; 
-	socket.send(
-		{"name":"aoino","vector" : 0}
-	);
+	var json = '{"name":"aoino","vector":0}';
+	socket.send(json);
+	console.log(json);
 }
 
 function up() {
@@ -53,6 +61,11 @@ function up() {
 function down() {
 	vectorSend(6);
 	console.log("press down key");
+	var json = '{"x":5, "y":7}';
+	var obj = JSON.parse(json);
+	console.log(json);
+	console.log(obj);
+	console.log(obj.x);
 }
 function right() {
 	vectorSend(3);
